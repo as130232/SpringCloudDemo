@@ -1,0 +1,15 @@
+#server:
+#   port: 8511
+#
+#spring:
+#   application:
+#      name: consul-producer
+#   cloud:
+#      consul:
+#         host: 127.0.0.1
+#         port: 8500
+#         discovery:
+#            serviceName: consul-producer
+#            healthCheckPath: /
+#            healthCheckInterval: 5s
+#            instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

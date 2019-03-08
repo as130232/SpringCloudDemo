@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: consul-config
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      config:
+        enabled: true
+        #fail-fast: true
+        format: YAML
+        prefix: config  #表示consul用於存储配置的文件夾根目錄名為config
+        defaultContext: application
+        profileSeparator: ','
+        data-key: data
+        watch:
+          enabled: true #時時刷新配置

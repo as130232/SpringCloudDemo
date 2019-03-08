@@ -1,0 +1,55 @@
+#server settings
+server:
+  port: 8511
+
+spring:
+  application:
+    name: consul-producer
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        serviceName: consul-producer
+        instanceId: ${spring.application.name}-${random.value}
+        healthCheckInterval: 15s
+#        preferIpAddress: true
+#        ipAddress: 127.0.0.1
+      config:
+        enabled: true
+        #fail-fast: true
+        format: YAML
+        prefix: config  #表示consul用於存储配置的文件夾根目錄名為config
+        defaultContext: application
+        profileSeparator: ','
+        data-key: data
+        watch:
+          enabled: true #時時刷新配置
+        
+#spring: 
+#  application: 
+#    name: api-gateway
+#  cloud: 
+#    config: 
+#      discovery: 
+#        enabled: true
+#        service-id: config-server
+#      profile: dev
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://${serviceregistry.ip}:8761/eureka/
+#    fetch-registry: true
+#    register-with-eureka: true
+#  instance:
+#    instanceId: ${spring.application.name}-${spring.cloud.client.ip-address}:${server.port}:${random.int}
+#    leaseExpirationDurationInSeconds: 90
+#    statusPageUrlPath:  /actuator/env
+#    healthCheckUrlPath: /actuator/health    
+#    prefer-ip-address: true
+
+
+      
