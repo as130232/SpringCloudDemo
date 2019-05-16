@@ -27,18 +27,64 @@ spring:
         data-key: data
         watch:
           enabled: true #時時刷新配置
-        
+          
+########################old setting###############################        
+#server:
+#  port: 9241
+#serviceregistry: 
+#  ip: 127.0.0.1
+#  #ip: 127.0.0.2
+#db: 
+#  ip: 127.0.0.1
+#  #ip: 127.0.0.2
+#  name: TEST_DB
+#  
+#config: 
+#  ip: 127.0.0.1
+#  
 #spring: 
 #  application: 
-#    name: api-gateway
+#    name: consul-producer
+#  profiles: 
+#    active: dev
+#  servlet:
+#    multipart:
+#      max-file-size: 100MB
+#      max-request-size: 100MB
+#      location: ${java.io.tmpdir}
+#  rabbitmq:
+#    host: 127.0.0.1
+#    username: test
+#    password: test123
+#  datasource:
+#    #    url: jdbc:p6spy:sqlserver://${cimforce.db.ip};DatabaseName=${cimforce.db.name} 
+#    url: jdbc:sqlserver://${db.ip};DatabaseName=${db.name}
+#    username: mes
+#    password: mes123
+#    #    driverClassName: com.p6spy.engine.spy.P6SpyDriver
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#  jpa: 
+#    show-sql: false
+#    hibernate: 
+#      ddl-auto: none
+#      #整合liquibase 到 spring boot.
+#  liquibase: 
+#    changeLog: classpath:dbschema/master.xml  # changelog主配置文件
+#    enabled: true  #如果在開發階段，不需要使用 liquibase，可以直接設定為false，所有的liquibase設定檔案不會被執行。
+#    drop-first: false
+#    user: test
+#    password: test123
+#    url: jdbc:sqlserver://${db.ip};DatabaseName=${db.name}
+#    change-log: classpath:dbschema/master.xml
+#    check-change-log-location: true
 #  cloud: 
-#    config: 
-#      discovery: 
+#    config:
+#      discovery:
 #        enabled: true
 #        service-id: config-server
 #      profile: dev
-
-#eureka:
+#      
+#eureka: 
 #  client:
 #    service-url:
 #      defaultZone: http://${serviceregistry.ip}:8761/eureka/
@@ -49,7 +95,11 @@ spring:
 #    leaseExpirationDurationInSeconds: 90
 #    statusPageUrlPath:  /actuator/env
 #    healthCheckUrlPath: /actuator/health    
-#    prefer-ip-address: true
+#    prefer-ip-address: true       
+#
+#ribbon:  
+#  ReadTimeout: 20000  
+#  ConnectTimeout: 20000        
 
 
       
