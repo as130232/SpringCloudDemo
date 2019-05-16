@@ -83,8 +83,6 @@ public class AccessFilter extends ZuulFilter {
       RequestContext cxt = RequestContext.getCurrentContext();
       HttpServletRequest request = cxt.getRequest();
 
-      // log.info("from {}:{}, locale: {}", request.getServerName(),
-      // request.getServerPort(), request.getLocale());
       log.info("send {} request to {}, queryString:{}", request.getMethod(), request.getRequestURI().toString(), request.getQueryString());
       // 登入、登出、包含public的請求，不需要檢查header中的token，其餘皆需要驗證token
       if (request.getRequestURI().contains("login") || request.getRequestURI().contains("logout") || request.getRequestURI().contains("public")

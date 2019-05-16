@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<contextName>logback</contextName>
+	<!--日誌級別 -->
+	<springProperty scope="context" name="logRootLevel"
+		source="logging.level.root" defaultValue="info" />
+<!-- 	<springProperty scope="context" name="logP6spyLevel" source="logging.level.p6spy" defaultValue="warn" /> -->
+<!-- 	<springProperty scope="context" name="SPRING_APPLICATION_NAME" source="spring.application.name" /> -->
+	
+	<!--輸出日誌文檔路徑 -->
+	<property name="log.path"
+		value="C:/backEndServer/log/base/api-gateway" />
+	<!--對日誌進行格式化 -->
+	<property name="logMsg"
+		value="%d{yyyy-MM-dd} %d{HH:mm:ss.SSS} %-5level [${HOSTNAME}] [%thread]  %logger{36} [%L] - %msg%n" />
+	<!--輸出到控制台 -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> <level>ERROR</level> 
+			</filter> -->
+		<encoder>
+			<pattern>${logMsg}</pattern>
+		</encoder>
+	</appender>
+
+	<!--輸出到文件，RollingFileAppender用於切分文件日誌 -->
+	<appender name="dailyRollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/logback.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!--保留最近30天的日誌 -->
+			<maxHistory>30</maxHistory>
+			<!--指定日誌文件的上限大小，例如設置為1GB的话，當達到這個值，就會刪除舊的日誌 -->
+			<totalSizeCap>1GB</totalSizeCap>
+			<!-- 當天的日誌大小超過 ${MAX_FILE_SIZE} 文件大小時候，新的内容寫入新的文件， 默認20MB -->
+			<!-- <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> -->
+			<!-- <maxFileSize>20MB</maxFileSize> -->
+			<!-- </timeBasedFileNamingAndTriggeringPolicy> -->
+		</rollingPolicy>
+		<encoder>
+			<pattern>${logMsg}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="${logRootLevel}">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="dailyRollingFileAppender" />
+	</root>
+	<!--設置請求API路徑的日誌級別 -->
+	<logger name="org.springframework.web.filter.CommonsRequestLoggingFilter"
+		level="DEBUG" />
+	<logger name="org.springframework" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.springframework.cloud" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.springframework.integration.handler.LoggingHandler"
+		additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.hibernate" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.hibernate.SQL" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.hibernate.type" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="org.apache.http.wire" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="com.zaxxer.hikari" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="springfox.documentation" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<logger name="liquibase" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="dailyRollingFileAppender" />
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+
+	<!-- logback為java中的包 -->
+	<logger name="com.cimforce" />
+	<!--logback.LogbackDemo：類的全路徑 -->
+	<!-- <logger name="com.cimforce.controller.LearnController" level="WARN" 
+		additivity="false"> -->
+	<!-- <appender-ref ref="console"/> -->
+	<!-- </logger> -->
+</configuration>
